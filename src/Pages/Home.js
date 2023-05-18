@@ -11,6 +11,7 @@ const HVBible = () => {
     const [bibleVerseTo, setBibleVerseTo] = useState(31);
     const [bibleContents, setBibleContents] = useState("1 The Revelation of Jesus Christ which God gave him so that his servants might have knowledge of the things which will quickly take place: and he sent and made it clear by his angel to his servant John; 2 Who gave witness of the word of God, and of the witness of Jesus Christ, even of all the things which he saw. 3 A blessing be on the reader, and on those who give ear to the prophet's words, and keep the things which he has put in the book: for the time is near. 4 John to the seven churches which are in Asia: Grace to you and peace, from him who is and was and is to come; and from the seven Spirits which are before his high seat; 5 And from Jesus Christ, the true witness, the first to come back from the dead, and the ruler of the kings of the earth. To him who had love for us and has made us clean from our sins by his blood; 6 And has made us to be a kingdom and priests to his God and Father; to him let glory and power be given for ever and ever. So be it. 7 See, he comes with the clouds, and every eye will see him, and those by whom he was wounded; and all the tribes of the earth will be sorrowing because of him. Yes, so be it. 8 I am the First and the Last, says the Lord God who is and was and is to come, the Ruler of all. 9 I, John, your brother, who have a part with you in the trouble and the kingdom and the quiet strength of Jesus, was in the island which is named Patmos, for the word of God and the witness of Jesus. 10 I was in the Spirit on the Lord's day, and a great voice at my back, as of a horn, came to my ears,");
     const [isBibleSearchActivated, setIsBibleSearchActivated] = useState(false);
+    const [isContributeModalTrigerred, setIsContributeModalTrigerred] = useState(false);
 
     const formatNumberWithRegex = (text) => {
       return text.replace(/\d+/g, (match) => `<strong><u>${match}</u></strong>`)
@@ -48,17 +49,17 @@ const HVBible = () => {
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                   </label>
                   <ul tabIndex={0} className="bg-white menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52">
-                      <li onClick={() => {setIsBibleSearchActivated(!isBibleSearchActivated)}}><p className="bg-transparent z-50">Search in bible</p></li>
-                      <li><Link className="bg-transparent z-50" to={"/contribute"}>Contribute</Link></li>
+                      <li onClick={() => {setIsBibleSearchActivated(true)}}><p className="bg-transparent z-50">Search in bible</p></li>
+                      <li onClick={() => {setIsContributeModalTrigerred(true)}}><p className="bg-transparent z-50">Contribute</p></li>
                   </ul>
               </div>
-              <Link className="normal-case font-semibold text-lg md:block z-50">HV Bible</Link>
+              <h1 className="normal-case font-semibold text-lg md:block z-50">HV Bible</h1>
           </div>
 
           <div className="navbar-center hidden lg:flex">
               <ul className="menu menu-horizontal px-1">
-                  <li onClick={() => {setIsBibleSearchActivated(!isBibleSearchActivated)}}><p className="bg-transparent z-50">Search in bible</p></li>
-                  <li><p className="bg-transparent z-50">Contribute</p></li>
+                  <li onClick={() => {setIsBibleSearchActivated(true)}}><p className="bg-transparent z-50">Search in bible</p></li>
+                  <li onClick={() => {setIsContributeModalTrigerred(true)}}><p className="bg-transparent z-50">Contribute</p></li>
               </ul>
           </div>
       </div>
@@ -102,6 +103,24 @@ const HVBible = () => {
 
             <div className="modal-action">
               <label htmlFor="my-modal" className="btn" onClick={() => {setIsBibleSearchActivated(false)}}>OK</label>
+            </div>
+          </div>
+        </div>
+        :
+        ""
+      }
+
+      {
+        isContributeModalTrigerred ? 
+        <div className="fixed inset-0 flex items-center justify-center z-50 font-poppins">
+          <div className="modal-box">
+            <div className="mt-5">
+              <h3 className="font-bold text-lg">Thanks for using HV Bible!</h3>
+              <p className="mt-6 text-justify leading-8">HV Bible is a free and open source online bible application developed by Malvin Valerian Gultom.</p>
+              <p className="mt-6 leading-8">Visit the project's repository at <a href="https://github.com/malvinval/hv-bible-app" className="underline text-blue-500">https://github.com/malvinval/hv-bible-app</a> and feel free to contribute to the development of the application.</p>
+            </div>
+            <div className="modal-action">
+              <label htmlFor="my-modal" className="btn" onClick={() => {setIsContributeModalTrigerred(false)}}>OK</label>
             </div>
           </div>
         </div>
